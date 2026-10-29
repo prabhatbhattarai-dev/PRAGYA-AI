@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #020817;
+  color: #e2e8f0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.markdown-body {
+  line-height: 1.7;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body blockquote,
+.markdown-body pre {
+  margin: 0.85rem 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.25rem;
+}
+
+.markdown-body code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
+
+.markdown-body a {
+  color: #67e8f9;
+  text-decoration: underline;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.markdown-body th, .markdown-body td {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+}
+
+.markdown-body th {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.markdown-body pre {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  border-radius: 12px;
+}
+
+.markdown-body blockquote {
+  border-left: 3px solid rgba(103, 232, 249, 0.8);
+  padding-left: 0.9rem;
+  color: #cbd5e1;
+}
