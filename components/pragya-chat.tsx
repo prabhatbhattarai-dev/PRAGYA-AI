@@ -6,8 +6,10 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {
+  ArrowRight,
   Bot,
   Check,
+  CheckCircle2,
   Copy,
   Loader2,
   MessageSquare,
@@ -38,7 +40,7 @@ type Conversation = {
   messages: Message[];
 };
 
-const welcomeMessage = 'Hello! I\'m Pragya, your AI assistant. What would you like to explore today?';
+const welcomeMessage = "Hello! I'm Pragya, your AI assistant. What would you like to explore today?";
 
 const starterPrompts = [
   'Explain something complicated.',
@@ -112,7 +114,7 @@ export function PragyaChat() {
 
   const activeConversation = useMemo(
     () => conversations.find((c) => c.id === activeConversationId) ?? conversations[0] ?? null,
-    [activeConversationId, conversations]
+    [activeConversationId, conversations],
   );
 
   const createNewConversation = () => {
@@ -139,7 +141,7 @@ export function PragyaChat() {
           updatedAt: new Date().toISOString(),
           messages: nextMessages,
         };
-      })
+      }),
     );
   };
 
@@ -160,7 +162,7 @@ export function PragyaChat() {
       current.map((conversation) => {
         if (conversation.id !== activeConversationId) return conversation;
         return { ...conversation, updatedAt: new Date().toISOString(), messages: streamingMessages };
-      })
+      }),
     );
 
     try {
@@ -191,12 +193,12 @@ export function PragyaChat() {
             updatedAt: new Date().toISOString(),
             messages: finalMessages,
           };
-        })
+        }),
       );
       setProviderNote(
         data.needsSetup
           ? data.setupMessage || 'No AI provider connected. Local demo mode is active.'
-          : `Live response via ${data.provider || 'connected provider'}.`
+          : `Live response via ${data.provider || 'connected provider'}.`,
       );
       setStatus('Ready');
     } catch (error) {
@@ -210,7 +212,7 @@ export function PragyaChat() {
           current.map((conversation) => {
             if (conversation.id !== activeConversationId) return conversation;
             return { ...conversation, updatedAt: new Date().toISOString(), messages: finalMessages };
-          })
+          }),
         );
       }
     } finally {
@@ -322,24 +324,130 @@ export function PragyaChat() {
 
         <div className="flex-1 overflow-y-auto px-3 py-4 md:px-6">
           {activeConversation?.messages.length === 0 ? (
-            <div className="mx-auto flex h-full max-w-3xl flex-col items-center justify-center gap-6 px-4 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-500/20 to-violet-500/20 ring-1 ring-cyan-400/20">
-                <Bot className="h-10 w-10 text-cyan-300" />
+            <div className="mx-auto flex max-w-5xl flex-col gap-6 py-4">
+              <div className="rounded-[28px] border border-slate-800 bg-slate-900/80 p-6 shadow-glow backdrop-blur-sm md:p-8">
+                <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                  <div>
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-cyan-200">
+                      <Sparkles className="h-3.5 w-3.5" />
+                      Your intelligence. Your possibilities.
+                    </div>
+
+                    <h2 className="max-w-xl text-4xl font-semibold tracking-tight text-white md:text-5xl">
+                      Think clearly. Build faster. Move smarter.
+                    </h2>
+
+                    <p className="mt-4 max-w-xl text-base text-slate-300 md:text-lg">
+                      PRAGYA AI brings together fast reasoning, creative thinking, and practical guidance in one clean workspace for learning, writing, planning, and building.
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
+                      <button
+                        onClick={() => setInput('Explain something complicated.')}
+                        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:opacity-95"
+                      >
+                        Start chatting
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={createNewConversation}
+                        className="rounded-xl border border-slate-700 bg-slate-800 px-5 py-3 text-sm font-medium text-slate-100 transition hover:border-cyan-400 hover:text-cyan-200"
+                      >
+                        New conversation
+                      </button>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-4 text-xs text-slate-400">
+                      <span className="inline-flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+                        Free-ready setup
+                      </span>
+                      <span className="inline-flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+                        Local or cloud AI
+                      </span>
+                      <span className="inline-flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-300" />
+                        Built for real work
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[24px] border border-slate-700 bg-slate-950/80 p-5 shadow-2xl">
+                    <div className="mb-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-violet-500 text-slate-950">
+                          <Bot className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-white">Pragya mode</p>
+                          <p className="text-xs text-slate-400">Helpful • practical • clear</p>
+                        </div>
+                      </div>
+                      <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[10px] text-emerald-300">
+                        Online
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 text-sm text-slate-300">
+                      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                        <p className="font-medium text-slate-200">Explain something complicated.</p>
+                      </div>
+                      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                        <p className="font-medium text-slate-200">Help me write better.</p>
+                      </div>
+                      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-3">
+                        <p className="font-medium text-slate-200">Plan a smarter workflow.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-3xl font-semibold tracking-tight text-white">Hello! I&apos;m Pragya, your AI assistant.</p>
-                <p className="mt-3 text-slate-400">What would you like to explore today?</p>
-              </div>
-              <div className="grid w-full max-w-2xl gap-3 md:grid-cols-2">
-                {starterPrompts.map((prompt) => (
-                  <button
-                    key={prompt}
-                    onClick={() => setInput(prompt)}
-                    className="rounded-2xl border border-slate-700 bg-slate-900/80 px-4 py-3 text-left text-sm text-slate-200 transition hover:border-cyan-400 hover:bg-slate-800"
+
+              <div className="grid gap-4 md:grid-cols-3">
+                {[
+                  {
+                    title: 'Fast thinking',
+                    text: 'Turn vague ideas into practical next steps.',
+                  },
+                  {
+                    title: 'Better writing',
+                    text: 'Structure clear drafts, emails, and product ideas.',
+                  },
+                  {
+                    title: 'Smart planning',
+                    text: 'Break projects into simple actions and momentum.',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 text-left"
                   >
-                    {prompt}
-                  </button>
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-300">
+                      <CheckCircle2 className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm text-slate-400">{item.text}</p>
+                  </div>
                 ))}
+              </div>
+
+              <div className="rounded-[24px] border border-slate-800 bg-slate-900/60 p-5">
+                <div className="mb-3 flex items-center gap-2 text-sm font-medium text-slate-200">
+                  <Sparkles className="h-4 w-4 text-cyan-300" />
+                  Suggested prompts
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {starterPrompts.map((prompt) => (
+                    <button
+                      key={prompt}
+                      onClick={() => setInput(prompt)}
+                      className="rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-left text-sm text-slate-200 transition hover:border-cyan-400 hover:bg-slate-800"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
@@ -349,10 +457,20 @@ export function PragyaChat() {
                   key={message.id}
                   className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-3xl rounded-2xl border p-4 shadow-sm ${message.role === 'user' ? 'border-cyan-400/30 bg-cyan-500/10' : 'border-slate-700 bg-slate-900/80'}`}>
+                  <div
+                    className={`max-w-3xl rounded-2xl border p-4 shadow-sm ${
+                      message.role === 'user'
+                        ? 'border-cyan-400/30 bg-cyan-500/10'
+                        : 'border-slate-700 bg-slate-900/80'
+                    }`}
+                  >
                     <div className="mb-2 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-2 text-xs text-slate-400">
-                        {message.role === 'assistant' ? <Bot className="h-4 w-4 text-cyan-300" /> : <User2 className="h-4 w-4 text-violet-300" />}
+                        {message.role === 'assistant' ? (
+                          <Bot className="h-4 w-4 text-cyan-300" />
+                        ) : (
+                          <User2 className="h-4 w-4 text-violet-300" />
+                        )}
                         <span>{message.role === 'assistant' ? 'Pragya' : 'You'}</span>
                         <span>•</span>
                         <span>{message.timestamp}</span>
@@ -363,7 +481,11 @@ export function PragyaChat() {
                           className="rounded-lg border border-slate-700 bg-slate-800 p-1.5 text-slate-300 hover:border-cyan-400 hover:text-cyan-300"
                           aria-label="Copy response"
                         >
-                          {copiedId === message.id ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4" />}
+                          {copiedId === message.id ? (
+                            <Check className="h-4 w-4 text-emerald-300" />
+                          ) : (
+                            <Copy className="h-4 w-4" />
+                          )}
                         </button>
                       )}
                     </div>
